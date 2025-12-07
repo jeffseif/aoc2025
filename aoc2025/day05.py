@@ -23,7 +23,7 @@ def spans_overlap(left: tuple[int, int], right: tuple[int, int]) -> bool:
 
 
 def get_collapsed(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
-    collapsed = []
+    collapsed: list[tuple[int, int]] = []
     for span in sorted(spans):
         try:
             idx, overlapping = next(
@@ -39,12 +39,12 @@ def get_collapsed(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
 
 
 def iter_fresh_id_counts(path_to_input: str) -> collections.abc.Iterator[int]:
-    spans = []
+    spans: list[tuple[int, int]] = []
     with open(file=path_to_input) as f:
         for line in f:
             if line == "\n":
                 break
-            spans.append(tuple(map(int, line.split("-"))))
+            spans.append(tuple(map(int, line.split("-"))))  # type: ignore
     while len(spans) > len(spans := get_collapsed(spans=spans)):
         ...
     for lower, upper in spans:
