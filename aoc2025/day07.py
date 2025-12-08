@@ -59,7 +59,6 @@ class ClassicManifold:
         return self
 
 
-# @aoc2025.expects(21)
 @aoc2025.expects(1499)
 def part_one(path_to_input: str) -> int:
     manifold = ClassicManifold.from_path_to_input(path_to_input=path_to_input)
@@ -67,7 +66,6 @@ def part_one(path_to_input: str) -> int:
     return manifold.splits
 
 
-# @aoc2025.expects(40)
 @aoc2025.expects(24743903847942)
 def part_two(path_to_input: str) -> int:
     manifold = ClassicManifold.from_path_to_input(path_to_input=path_to_input)
