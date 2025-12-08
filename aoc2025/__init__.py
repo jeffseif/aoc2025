@@ -1,3 +1,4 @@
+import collections
 import collections.abc
 import functools
 import os
@@ -38,3 +39,7 @@ def count(it: collections.abc.Iterable[typing.Any]) -> int:
     for _ in it:
         count += 1
     return count
+
+
+def exhaust(it: collections.abc.Iterable[typing.Any]) -> None:
+    collections.deque(it, maxlen=0)
