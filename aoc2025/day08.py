@@ -12,13 +12,13 @@ def iter_xyz(
 ) -> collections.abc.Iterator[tuple[int, int, int]]:
     with open(file=path_to_input) as f:
         for line in f:
-            yield tuple(map(int, line.split(",")))
+            yield tuple(map(int, line.split(",")))  # type: ignore
 
 
 def get_distance_squared(
     left: tuple[int, int, int], right: tuple[int, int, int]
 ) -> float:
-    return sum((l - r) ** 2 for l, r in zip(left, right, strict=True))
+    return sum((one - two) ** 2 for one, two in zip(left, right, strict=True))
 
 
 @aoc2025.expects(181584)
@@ -32,7 +32,7 @@ def part_one(
         )
     }
     xyz_to_group = {}
-    group_to_xyzs = collections.defaultdict(set)
+    group_to_xyzs: dict[int, set[tuple[int, int, int]]] = collections.defaultdict(set)
     for left, right in itertools.islice(
         sorted(distances, key=distances.__getitem__), number_of_connections
     ):
@@ -69,7 +69,7 @@ def part_two(path_to_input: str) -> int:
         for left, right in itertools.combinations(xyzs, 2)
     }
     xyz_to_group = {}
-    group_to_xyzs = collections.defaultdict(set)
+    group_to_xyzs: dict[int, set[tuple[int, int, int]]] = collections.defaultdict(set)
     for left, right in sorted(distances, key=distances.__getitem__):
         if (left not in xyz_to_group) and (right not in xyz_to_group):
             xyz_to_group[left] = xyz_to_group[right] = group = (
